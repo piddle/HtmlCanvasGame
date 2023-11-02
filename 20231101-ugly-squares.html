@@ -1,0 +1,18 @@
+<html>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script type="text/javascript">
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 200;
+        canvas.height = 200;
+
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "orange";
+        ctx.strokeRect(20, 20, 100, 100);
+        ctx.strokeRect(50, 50, 100, 100);
+        ctx.strokeRect(80, 80, 100, 100);
+    </script>
+</body>
+</html>
