@@ -56,4 +56,4 @@ After the idea chat, I thought I'd look into the HTML Canvas API, I've seen peop
 
 I started here: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 
-Looks pretty simple, so I made some ugly squares, I'll commit some code for it.
+Looks pretty simple, so I made some ugly squares, I'll commit some code for it: [20231101-ugly-squares.html](20231101-ugly-squares.html)
