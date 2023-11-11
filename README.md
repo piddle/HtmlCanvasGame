@@ -57,3 +57,28 @@ After the idea chat, I thought I'd look into the HTML Canvas API, I've seen peop
 I started here: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 
 Looks pretty simple, so I made some ugly squares, I'll commit some code for it: [20231101-ugly-squares.html](20231101-ugly-squares.html)
+
+## 2023/11/10: Draw three squares
+
+Squares A, B and C.
+
+We want the squares to move slowly around.
+
+To achieve this we need to render a frame, wait some time then re-render, and keep doing this. Between each render we want to adjust the location of each square.
+
+We need a render function:
+
+```
+render()
+  move A => xA = xA + 1; yA = yA + 1;
+  (same for B and C)
+  draw A
+  draw B
+  draw C
+end
+```
+Call render every 25 milliseconds so we have (1000/25 = 40) ~40 FPS.
+
+Not sure exactly how much to move by, but will try something out.
+
+Here's how it went: [20231111-three-squares-that-move.html](20231111-three-squares-that-move.html)
