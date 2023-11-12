@@ -58,7 +58,7 @@ I started here: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 
 Looks pretty simple, so I made some ugly squares, I'll commit some code for it: [20231101-ugly-squares.html](20231101-ugly-squares.html)
 
-## 2023/11/10: Draw three squares
+## 2023/11/11: Draw three squares
 
 Squares A, B and C.
 
@@ -82,3 +82,5 @@ Call render every 25 milliseconds so we have (1000/25 = 40) ~40 FPS.
 Not sure exactly how much to move by, but will try something out.
 
 Here's how it went: [20231111-three-squares-that-move.html](20231111-three-squares-that-move.html)
+
+Some additional tinkering on my own to add a crude FPS counter: [20231111-three-squares-that-move-plus-fps.html](20231111-three-squares-that-move-plus-fps.html)
