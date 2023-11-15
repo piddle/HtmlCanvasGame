@@ -10,76 +10,93 @@
         canvas.width = 400;
         canvas.height = 400;
 
-        const state = {
-            top: 30,
-            bottom: canvas.height - 20,
+        //----------------------------------------------------
 
-            xA: 10,
-            yA: 30,
-            
-            xB: 10,
-            yB: 60,
+        let xA = 10;
+        let yA = 30;
+        let xB = 10;
+        let yB = 60;
+        let xC = 10;
+        let yC = 90;
 
-            xC: 10,
-            yC: 90,
-
-            frameCounterIndex: 0,
-            frameCounters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            frameCount: 0
-        };
+        let frameCounterIndex = 0;
+        let frameCounters = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let frameCount = 0;
 
         const countFrame = (date) => {
             const milliseconds = date.getMilliseconds();
             const counterIndex = Math.floor(milliseconds / 100);
 
             // Same index
-            if (counterIndex === state.frameCounterIndex) {
-                state.frameCounters[counterIndex] = state.frameCounters[counterIndex] + 1;
+            if (counterIndex === frameCounterIndex) {
+                frameCounters[counterIndex] = frameCounters[counterIndex] + 1;
                 return;
             }
 
             // Wrapped around index
-            if (counterIndex < state.frameCounterIndex) {
+            if (counterIndex < frameCounterIndex) {
                 // Set any missed ones at the start to zero
                 for (let index = 0; index < counterIndex; index++) {
-                    state.frameCounters[index] = 0;
+                    frameCounters[index] = 0;
                 }
 
                 // Set any missed ones from end to zero
-                for (let index = state.frameCounterIndex + 1; index < state.frameCounters.length; index++) {
-                    state.frameCounters[index] = 0;
+                for (let index = frameCounterIndex + 1; index < frameCounters.length; index++) {
+                    frameCounters[index] = 0;
                 }
             }
             // Otherwise we've moved on
             else {
                 // Set any missed ones to zero
-                for (let index = state.frameCounterIndex + 1; index < counterIndex; index++) {
-                    state.frameCounters[index] = 0;
+                for (let index = frameCounterIndex + 1; index < counterIndex; index++) {
+                    frameCounters[index] = 0;
                 }
             }
 
-            state.frameCounters[counterIndex] = 1;
-            state.frameCounterIndex = counterIndex;
+            frameCounters[counterIndex] = 1;
+            frameCounterIndex = counterIndex;
         };
 
         const updateFpsCount = () => {
-            state.frameCount = state.frameCounters.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            frameCount = frameCounters.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         }
 
         const render = () => {
             // Move A
-            state.yA = (state.yA > state.bottom) ? state.top : (state.yA + 2);
+            yA = yA + 2;
+
+            if (yA >= canvas.height) {
+                yA = 30;
+            }
 
             // Move B
-            state.xB = (state.xB + 1) % canvas.width;
-            state.yB = (state.yB + 2) % canvas.height;
+            xB = xB + 1;
+
+            if (xB >= canvas.width) {
+                xB = 10;
+            }
+
+            yB = yB + 2;
+
+            if (yB >= canvas.height) {
+                yB = 0;
+            }
 
             // Move C
-            state.xC = (state.xC + 1) % canvas.width;
-            state.yC = (state.yC + 2) % canvas.height;
+            xC = xC + 1;
+
+            if (xC >= canvas.width) {
+                xC = 10;
+            }
+
+            yC = yC + 2;
+
+            if (yC >= canvas.height) {
+                yC = 0;
+            }
 
             // Clear
-            ctx.strokeStyle = "black";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // Draw the time & FPS
@@ -87,20 +104,22 @@
             countFrame(date);
             ctx.strokeStyle = "white";
             ctx.strokeText(date.toISOString(), 10, 10);
-            ctx.strokeText(`FPS: ${state.frameCount}`, canvas.width - 50, 10);
+            ctx.strokeText(`FPS: ${frameCount}`, canvas.width - 50, 10);
 
             // Draw A
             ctx.strokeStyle = "red";
-            ctx.strokeRect(state.xA, state.yA, 10, 10);
+            ctx.strokeRect(xA, yA, 10, 10);
 
             // Draw B
             ctx.strokeStyle = "green";
-            ctx.strokeRect(state.xB, state.yB, 10, 10);
+            ctx.strokeRect(xB, yB, 10, 10);
 
             // Draw C
             ctx.strokeStyle = "blue";
-            ctx.strokeRect(state.xC, state.yC, 10, 10);
+            ctx.strokeRect(xC, yC, 10, 10);
         };
+
+        //----------------------------------------------------
 
         // Render ~40FPS
         window.setInterval(render, 25);
